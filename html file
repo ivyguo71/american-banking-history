@@ -1,0 +1,60 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trust and American Banking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Trust, Power, and American Banking</h1>
+  <p>How financial stability depended on political legitimacy over time</p>
+</header>
+
+<section>
+  <h2>The Core Problem</h2>
+  <p>
+    Early national banks stabilized the U.S. economy but failed politically.
+    This project explores why effectiveness alone was not enough.
+  </p>
+</section>
+
+<section>
+  <h2>Early National Banks</h2>
+  <p>
+    The First and Second Banks of the United States regulated currency and credit,
+    yet collapsed due to regional distrust and political opposition.
+  </p>
+
+  <label>Centralized Power</label>
+  <input type="range" id="powerRange" min="0" max="100" value="50">
+  <p id="powerOutput">Power Level: 50</p>
+</section>
+
+<section>
+  <h2>Counterargument: Andrew Jackson</h2>
+  <p>
+    Jackson argued the Bank privileged elites and harmed ordinary Americans.
+  </p>
+
+  <button id="agreeBtn">Agree</button>
+  <button id="disagreeBtn">Disagree</button>
+  <p id="counterOutput"></p>
+</section>
+
+<section>
+  <h2>The Federal Reserve</h2>
+  <p>
+    The Federal Reserve succeeded by balancing national authority with regional representation.
+  </p>
+</section>
+
+<footer>
+  <p>Created by Ivy | AP U.S. History</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
