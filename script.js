@@ -1,4 +1,3 @@
-script.js
 const powerRange = document.getElementById("powerRange");
 const powerOutput = document.getElementById("powerOutput");
 const counterOutput = document.getElementById("counterOutput");
