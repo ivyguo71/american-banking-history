@@ -1,8 +1,8 @@
-// script.js - Bank Wars: Multiple Choice + Meter Feedback (Clean Version)
+// script.js - Bank Wars
 // APUSH Project - Ivy - January 12, 2026
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Bank Wars - Multiple Choice Edition Loaded!");
+  console.log("Bank Wars - On-Page Feedback Edition Loaded!");
 
   // Game State
   let gameState = {
@@ -29,84 +29,84 @@ document.addEventListener("DOMContentLoaded", function () {
   const gameResult = document.getElementById("gameResult");
 
   // Safety check
-  if (!startBtn || !gameSection || !introSection || !choicesDiv) {
-    console.error("Missing critical elements! Check HTML IDs.");
+  if (!startBtn || !gameSection || !introSection || !choicesDiv || !counterOutput) {
+    console.error("Missing critical elements! Check your HTML IDs.");
     return;
   }
 
-  // Eras with multiple choice options (from your research)
+  // Eras with choices (based on your research document)
   const eras = [
     {
       title: "Era 1: Hamilton's Proposal (1790)",
-      scenario: "The nation faces debts and instability. Hamilton proposes a national bank. What level of centralized power do you give it?",
+      scenario: "The nation faces debts, no uniform currency, and weak credit. Hamilton proposes a national bank to solve economic instability. What level of centralized power do you give it?",
       choices: [
         {
           text: "Very strong national bank (high centralization)",
           delta: { econ: +18, trust: -12, ineq: +15 },
-          feedback: "The Bank becomes a powerful fiscal agent, regulating currency and credit — strong economic stability, but many fear elitism and Northern favoritism (as Hamilton's report idealized benefits without addressing political resistance)."
+          feedback: "The Bank acts as a fiscal agent, regulates currency, restrains risky banking practices, and promotes growth (as Hamilton argued). However, political backlash and regional disputes limit long-term consensus — as seen in opposition to centralized power."
         },
         {
-          text: "Moderate national bank with state cooperation",
+          text: "Moderate national bank with state input",
           delta: { econ: +10, trust: +5, ineq: +5 },
-          feedback: "Balanced approach provides some regulation and growth, but limited power leaves the nation vulnerable to regional disputes and instability."
+          feedback: "Balanced approach provides some stability and regulation, but limited power makes it harder to manage national credit effectively — contributing to ongoing tensions."
         },
         {
           text: "Weak, mostly state-controlled bank",
           delta: { econ: -12, trust: +15, ineq: -8 },
-          feedback: "High political trust from states, but no strong federal system leads to weak credit, currency issues, and ongoing economic instability — as early banks struggled."
+          feedback: "Political trust rises from states and local interests, but the nation struggles with economic instability, no strong federal fiscal agent, and lack of uniform currency — early patterns that predicted collapse."
         }
       ]
     },
     {
       title: "Era 2: Second Bank under Nicholas Biddle (1820s–1830s)",
-      scenario: "Biddle manages the Second Bank effectively, restraining risky banks and promoting growth. But regional opposition grows. How do you handle the Bank's power?",
+      scenario: "Biddle's sound management restrains risky state banks and contributes to economic growth. But regional tensions rise. How aggressively do you defend the Bank's charter?",
       choices: [
         {
           text: "Aggressively defend & expand the Bank's power",
           delta: { econ: +20, trust: -18, ineq: +20 },
-          feedback: "Sound management contributes to economic growth and stability — but Jackson portrays it as an elitist, privileged institution benefiting the few at the expense of farmers and laborers."
+          feedback: "Sound management is credited with economic growth, but Jackson successfully portrays the Bank as an elitist, privileged institution that benefits the few — fueling political opposition and regional disputes."
         },
         {
-          text: "Compromise with regional interests",
+          text: "Compromise with regional and state interests",
           delta: { econ: +8, trust: +10, ineq: +5 },
-          feedback: "Some political support is gained, but the Bank's ability to regulate and stabilize is weakened — foreshadowing its vulnerability to opposition."
+          feedback: "Some political support is gained, but the Bank's effectiveness in regulating and stabilizing is reduced — highlighting the challenge of maintaining consensus."
         },
         {
-          text: "Allow more state control",
+          text: "Allow more state control over banking",
           delta: { econ: -15, trust: +18, ineq: -10 },
-          feedback: "Political trust rises among states, but national financial stability suffers — contributing to later panics and instability."
+          feedback: "Political trust rises among states, but national financial stability suffers — a key factor in the eventual collapse of the Second Bank."
         }
       ]
     },
     {
       title: "Era 3: Jackson's Bank War (1832)",
-      scenario: "Jackson vetoes the Bank's recharter, calling it elitist and harmful to ordinary citizens. Do you support his position?",
+      scenario: "Jackson vetoes the recharter, arguing the Bank concentrates power in the hands of elites and harms ordinary Americans. Do you support his position?",
       choices: [
         {
-          text: "Support Jackson – veto & destroy the Bank",
+          text: "Support Jackson – veto and destroy the Bank",
           delta: { econ: -25, trust: +25, ineq: -15 },
-          feedback: "Political trust surges among farmers, workers, and states — but destroying the Bank leads to economic instability and contributes to the Panic of 1837."
+          feedback: "Political trust surges among farmers, laborers, and states (as Jackson framed it), but the economy faces instability without a central bank — contributing to later panics."
         },
         {
-          text: "Oppose Jackson – renew the Bank's charter",
+          text: "Oppose the veto – renew the Bank's charter",
           delta: { econ: +15, trust: -20, ineq: +18 },
-          feedback: "Economic stability improves with continued regulation — but deepens regional and class divisions, seen as favoring the rich and powerful."
+          feedback: "Economic stability improves with continued regulation, but deepens regional and class divisions — seen as favoring the rich and powerful (Jackson's main critique)."
         }
       ]
     },
     {
       title: "Era 4: Federal Reserve Creation (1913)",
-      scenario: "After repeated panics, the Federal Reserve is created. How do you balance national oversight with regional representation?",
+      scenario: "Repeated banking panics show the need for reform. The Federal Reserve is created with 12 regional banks and independence. How do you balance national authority?",
       choices: [
         {
-          text: "Strong independence + decentralized structure",
+          text: "Strong independence + decentralized regional structure",
           delta: { econ: +25, trust: +15, ineq: -10 },
-          feedback: "The Fed reduces previous tensions with balanced power — national oversight for stability, regional banks for representation, autonomy from direct politics — proven effective in crises like 2008."
+          feedback: "Tensions are lessened! The Fed balances national oversight with regional representation, providing autonomy from direct politics — effective in crises like 2008 through flexible tools (open market operations, quantitative easing, liquidity provision)."
         },
         {
           text: "More direct political control over the Fed",
           delta: { econ: +5, trust: -10, ineq: +15 },
-          feedback: "Short-term political popularity rises, but risks long-term credibility and effectiveness — repeating early patterns of instability."
+          feedback: "Short-term political popularity rises, but risks repeating early patterns of instability — as political pressure can undermine long-term credibility and effectiveness."
         }
       ]
     }
@@ -141,58 +141,54 @@ document.addEventListener("DOMContentLoaded", function () {
       const btn = document.createElement("button");
       btn.className = "btn btn-outline-primary btn-lg m-2";
       btn.textContent = choice.text;
-      btn.addEventListener("click", () => selectChoice(choice));
+      btn.addEventListener("click", () => {
+        // Apply changes
+        gameState.economicStability = Math.max(0, Math.min(100, gameState.economicStability + choice.delta.econ));
+        gameState.politicalTrust = Math.max(0, Math.min(100, gameState.politicalTrust + choice.delta.trust));
+        gameState.inequalityLevel = Math.max(0, Math.min(100, gameState.inequalityLevel + choice.delta.ineq));
+        gameState.score += (choice.delta.econ * 0.4 + choice.delta.trust * 0.4 - choice.delta.ineq * 0.2);
+
+        updateMeters();
+
+        // Show feedback on page (no popup!)
+        counterOutput.innerHTML = `<strong>Historical Outcome:</strong><br>${choice.feedback}`;
+        counterOutput.classList.remove("d-none");
+
+        // Disable choices & show next
+        choicesDiv.querySelectorAll("button").forEach(b => b.disabled = true);
+        nextBtn.classList.remove("d-none");
+      });
       choicesDiv.appendChild(btn);
     });
 
-    counterOutput.textContent = "";
+    // Reset feedback box for new era
+    counterOutput.classList.add("d-none");
     nextBtn.classList.add("d-none");
     updateMeters();
-  }
-
-  // When a choice is selected
-  function selectChoice(choice) {
-    // Update state
-    gameState.economicStability = Math.max(0, Math.min(100, gameState.economicStability + choice.delta.econ));
-    gameState.politicalTrust = Math.max(0, Math.min(100, gameState.politicalTrust + choice.delta.trust));
-    gameState.inequalityLevel = Math.max(0, Math.min(100, gameState.inequalityLevel + choice.delta.ineq));
-
-    gameState.score += (choice.delta.econ * 0.4 + choice.delta.trust * 0.4 - choice.delta.ineq * 0.2);
-
-    updateMeters();
-
-    // Show feedback in counterOutput (clean & integrated)
-    counterOutput.innerHTML = `<strong>Historical Feedback:</strong> ${choice.feedback}`;
-    counterOutput.className = "mt-4 p-3 border rounded bg-light fst-italic";
-
-    // Disable choices & show next
-    choicesDiv.querySelectorAll("button").forEach(btn => btn.disabled = true);
-    nextBtn.classList.remove("d-none");
   }
 
   // End game
   function endGame() {
     choicesDiv.innerHTML = "";
     nextBtn.classList.add("d-none");
-    counterOutput.textContent = "";
+    counterOutput.classList.add("d-none");
 
-    let ending = "";
+    let ending = "Game Complete!";
     if (gameState.economicStability >= 80 && gameState.politicalTrust >= 70) {
-      ending = "Outstanding Success! You balanced stability and trust — much like the Federal Reserve overcame early tensions.";
+      ending += "<br><strong>Outstanding Success!</strong> You achieved a stable system with trust — much like the Federal Reserve overcame early tensions.";
       gameState.score += 30;
     } else if (gameState.economicStability < 40) {
-      ending = "Economic Disaster! Repeated panics and instability resulted from your choices.";
+      ending += "<br><strong>Economic Disaster!</strong> Repeated instability and panics resulted.";
     } else if (gameState.politicalTrust < 40) {
-      ending = "Political Collapse! Backlash and division destroyed the system — repeating early bank failures.";
+      ending += "<br><strong>Political Collapse!</strong> Backlash and division destroyed the system — repeating early bank failures.";
     } else {
-      ending = "Mixed Outcome: Partial stability achieved, but political divisions and inequality persisted.";
+      ending += "<br><strong>Mixed Outcome</strong>: Partial stability achieved, but political divisions and inequality persisted.";
     }
 
     gameResult.innerHTML = `
-      <h3 class="text-center mb-4">Game Complete!</h3>
-      <div class="alert alert-info text-center">${ending}</div>
+      <h3 class="text-center mb-4">${ending}</h3>
       <p class="text-center fs-4 fw-bold">
-        Final Score: ${Math.round(gameState.score)} / 100<br>
+        Final Score: ${Math.round(gameState.score)}<br>
         <small>Stability: ${Math.round(gameState.economicStability)}% | Trust: ${Math.round(gameState.politicalTrust)}% | Inequality: ${Math.round(gameState.inequalityLevel)}%</small>
       </p>
       <div class="text-center mt-4">
@@ -214,5 +210,5 @@ document.addEventListener("DOMContentLoaded", function () {
     loadEra();
   });
 
-  console.log("Ready! Click 'Start Game' to play.");
+  console.log("Ready! Click 'Start Game' to begin.");
 });
