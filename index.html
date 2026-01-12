@@ -4,140 +4,259 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bank Wars: America's Financial Destiny</title>
-  <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
+  <style>
+    .feedback-box {
+      min-height: 120px;
+      background: #f8f9fa;
+      border-left: 5px solid #0d6efd;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body class="bg-light">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="#">Bank Wars – APUSH Project</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#intro">Introduction</a></li>
-        <li class="nav-item"><a class="nav-link" href="#game">Play Game</a></li>
-        <li class="nav-item"><a class="nav-link" href="#video">Video Presentation</a></li>
-      </ul>
-    </div>
   </div>
 </nav>
 
 <header class="text-center py-5 bg-primary text-white">
-  <h1>Bank Wars: Build (or Destroy) America's Financial Future</h1>
-  <p class="lead">A historical decision-making game based on the rise & fall of national banks</p>
+  <h1>Bank Wars: America's Financial Destiny</h1>
+  <p class="lead">Interactive decisions on centralized banking power</p>
 </header>
 
 <section id="intro" class="container my-5">
-  <div class="row">
-    <div class="col-lg-8 mx-auto">
-      <h2 class="text-center mb-4">Game Objective</h2>
-      <p>You will play through key moments in American banking history (1790–1913+).</p>
-      <p>Make decisions about centralized banking power. Watch how your choices affect three meters:</p>
-      <ul>
-        <li><strong>Economic Stability</strong> – How well the system prevents panics & promotes growth</li>
-        <li><strong>Political Trust</strong> – Public & regional acceptance of the system</li>
-        <li><strong>Inequality Level</strong> – How much the system favors elites vs. ordinary citizens</li>
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="text-center mb-4">Welcome</h2>
+      <p class="lead text-center">Make choices for each era. See how they affect:</p>
+      <ul class="list-unstyled text-center">
+        <li><strong>Economic Stability</strong></li>
+        <li><strong>Political Trust</strong></li>
+        <li><strong>Inequality Level</strong></li>
       </ul>
-      <p>Will you create a stable financial powerhouse… or spark rebellion and collapse?</p>
-      
       <div class="text-center mt-4">
-        <button id="startGame" class="btn btn-success btn-lg px-5">Start the Game</button>
+        <button id="startGame" class="btn btn-success btn-lg px-5">Start Game</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== GAME SECTION ===================== -->
 <section id="game" class="container my-5 d-none">
   <div class="card shadow-lg">
     <div class="card-header bg-dark text-white">
-      <h3 id="eraTitle" class="mb-0">Era 1: Founding the System (1790)</h3>
+      <h3 id="eraTitle" class="mb-0"></h3>
       <div class="progress mt-2" style="height: 10px;">
-        <div id="progressBar" class="progress-bar bg-info" role="progressbar" style="width: 20%;"></div>
+        <div id="progressBar" class="progress-bar bg-info" role="progressbar" style="width: 0%;"></div>
       </div>
     </div>
-    
+
     <div class="card-body">
-      <!-- Status Meters -->
+      <!-- Meters -->
       <div class="row text-center mb-4">
         <div class="col-md-4">
           <h5>Economic Stability</h5>
-          <div class="progress mb-2" style="height: 25px;">
+          <div class="progress mb-2" style="height: 28px;">
             <div id="econBar" class="progress-bar bg-success" role="progressbar" style="width: 50%;">50%</div>
           </div>
         </div>
         <div class="col-md-4">
           <h5>Political Trust</h5>
-          <div class="progress mb-2" style="height: 25px;">
+          <div class="progress mb-2" style="height: 28px;">
             <div id="trustBar" class="progress-bar bg-warning" role="progressbar" style="width: 50%;">50%</div>
           </div>
         </div>
         <div class="col-md-4">
           <h5>Inequality Level</h5>
-          <div class="progress mb-2" style="height: 25px;">
+          <div class="progress mb-2" style="height: 28px;">
             <div id="ineqBar" class="progress-bar bg-danger" role="progressbar" style="width: 50%;">50%</div>
           </div>
         </div>
       </div>
 
-      <!-- Current Scenario + Choices -->
-      <div id="scenario" class="mb-4">
-        <p class="lead">As Alexander Hamilton, you propose a powerful national bank to stabilize the young nation. How centralized should it be?</p>
-      </div>
+      <!-- Scenario -->
+      <p id="scenario" class="lead mb-4"></p>
 
-      <div class="d-grid gap-3 mb-4" id="choices">
-        <!-- Choices will be dynamically inserted -->
-      </div>
+      <!-- Choices -->
+      <div id="choices" class="d-grid gap-3 mb-4"></div>
 
-      <!-- Power Level Slider (enhanced) -->
-      <div class="mb-4">
-        <label for="powerRange" class="form-label fw-bold">Centralized Power Level (0 = Fully State-Controlled • 100 = Very Strong National Bank)</label>
-        <input type="range" class="form-range" id="powerRange" min="0" max="100" value="50">
-        <p id="powerOutput" class="text-center mt-2 fw-bold">Power Level: 50 — Balanced</p>
-      </div>
-
-      <!-- Jackson Counterargument Section -->
-      <div class="border-top pt-4 mt-4">
-        <h5>Andrew Jackson's View (1832)</h5>
-        <p class="text-muted">Jackson saw the Bank as elitist and harmful to ordinary Americans. Do you agree?</p>
-        <div class="btn-group">
-          <button id="agreeBtn" class="btn btn-outline-success">Agree with Jackson</button>
-          <button id="disagreeBtn" class="btn btn-outline-danger">Disagree</button>
-        </div>
-        <p id="counterOutput" class="mt-3 fst-italic"></p>
-      </div>
+      <!-- Feedback (no popup - integrated here) -->
+      <div id="counterOutput" class="feedback-box d-none"></div>
     </div>
 
     <div class="card-footer text-center">
-      <button id="nextEra" class="btn btn-primary px-5 d-none">Continue to Next Era</button>
-      <p id="gameResult" class="mt-3 fw-bold"></p>
+      <button id="nextEra" class="btn btn-primary px-5 d-none">Next Era</button>
+      <div id="gameResult" class="mt-4"></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== VIDEO SECTION ===================== -->
-<section id="video" class="container my-5 bg-white py-5 rounded shadow">
-  <h2 class="text-center mb-4">Project Video Presentation</h2>
-  <div class="text-center">
-    <a href="https://app.screencastify.com/watch/UdLcOyIMs6jSgiCaXhnZ" target="_blank" class="btn btn-lg btn-primary">
-      Watch the Full Video Explanation
-    </a>
-  </div>
-</section>
-
-<footer class="bg-dark text-white text-center py-4">
-  <p>AP U.S. History Project • Created by Ivy • January 2026</p>
+<footer class="bg-dark text-white text-center py-4 mt-5">
+  <p>AP U.S. History Project • Created by Ivy • January 12, 2026</p>
 </footer>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Custom Game Logic -->
-<script src="script.js"></script>
+<script>
+// script.js - Multiple Choice with Integrated Feedback (No Popups)
+
+document.addEventListener("DOMContentLoaded", function () {
+  const startBtn = document.getElementById("startGame");
+  const introSection = document.getElementById("intro");
+  const gameSection = document.getElementById("game");
+  const eraTitle = document.getElementById("eraTitle");
+  const progressBar = document.getElementById("progressBar");
+  const econBar = document.getElementById("econBar");
+  const trustBar = document.getElementById("trustBar");
+  const ineqBar = document.getElementById("ineqBar");
+  const scenarioText = document.getElementById("scenario");
+  const choicesDiv = document.getElementById("choices");
+  const counterOutput = document.getElementById("counterOutput");
+  const nextBtn = document.getElementById("nextEra");
+  const gameResult = document.getElementById("gameResult");
+
+  let gameState = {
+    era: 1,
+    economicStability: 50,
+    politicalTrust: 50,
+    inequalityLevel: 50,
+    score: 0
+  };
+
+  const eras = [
+    {
+      title: "Era 1: Hamilton's Proposal (1790)",
+      scenario: "The nation faces debts, no uniform currency, and weak credit. Hamilton proposes a national bank. What level of centralized power do you give it?",
+      choices: [
+        { text: "Very strong national bank (high centralization)", delta: { econ: +18, trust: -12, ineq: +15 }, feedback: "The Bank becomes a powerful fiscal agent, regulating currency and restraining risky banking practices — strong economic growth, but political opposition views it as elitist and favoring the few." },
+        { text: "Moderate national bank with state cooperation", delta: { econ: +10, trust: +5, ineq: +5 }, feedback: "Balanced approach provides some stability and regulation, but limited power makes it harder to manage national credit and currency effectively." },
+        { text: "Weak, mostly state-controlled bank", delta: { econ: -12, trust: +15, ineq: -8 }, feedback: "Political trust rises from states, but the nation struggles with economic instability, no strong federal fiscal agent, and lack of uniform currency." }
+      ]
+    },
+    {
+      title: "Era 2: Second Bank under Biddle (1820s–1830s)",
+      scenario: "Biddle's sound management restrains risky banks and promotes growth, but regional tensions rise. How aggressively do you defend the Bank's power?",
+      choices: [
+        { text: "Aggressively defend and expand the Bank's power", delta: { econ: +20, trust: -18, ineq: +20 }, feedback: "Sound management contributes to economic growth and stability, but Jackson portrays the Bank as a privileged, elitist institution that benefits the few." },
+        { text: "Compromise with regional interests", delta: { econ: +8, trust: +10, ineq: +5 }, feedback: "Some political support is gained, but the Bank's ability to regulate and stabilize the economy is reduced." },
+        { text: "Allow more state control", delta: { econ: -15, trust: +18, ineq: -10 }, feedback: "Political trust rises among states, but national financial stability suffers." }
+      ]
+    },
+    {
+      title: "Era 3: Jackson's Bank War (1832)",
+      scenario: "Jackson vetoes the recharter, calling the Bank elitist and harmful to ordinary citizens. Do you support his decision?",
+      choices: [
+        { text: "Support Jackson – veto and destroy the Bank", delta: { econ: -25, trust: +25, ineq: -15 }, feedback: "Political trust surges among farmers, laborers, and states, but the economy faces instability without a central bank (leading toward the Panic of 1837)." },
+        { text: "Oppose the veto – renew the Bank's charter", delta: { econ: +15, trust: -20, ineq: +18 }, feedback: "Economic stability improves with continued regulation, but deepens regional and class divisions — seen as favoring the rich and powerful." }
+      ]
+    },
+    {
+      title: "Era 4: Federal Reserve Creation (1913)",
+      scenario: "Repeated panics show the need for reform. The Federal Reserve is created. How do you balance national authority with regional representation?",
+      choices: [
+        { text: "Strong independence + decentralized structure", delta: { econ: +25, trust: +15, ineq: -10 }, feedback: "Tensions are reduced. The Fed balances national oversight with regional banks, providing autonomy from direct politics — proven flexible and effective in crises like 2008." },
+        { text: "More direct political control over the Fed", delta: { econ: +5, trust: -10, ineq: +15 }, feedback: "Short-term political popularity rises, but risks long-term credibility and repeats patterns of instability from early institutions." }
+      ]
+    }
+  ];
+
+  function updateMeters() {
+    econBar.style.width = gameState.economicStability + "%";
+    econBar.textContent = Math.round(gameState.economicStability) + "%";
+    trustBar.style.width = gameState.politicalTrust + "%";
+    trustBar.textContent = Math.round(gameState.politicalTrust) + "%";
+    ineqBar.style.width = gameState.inequalityLevel + "%";
+    ineqBar.textContent = Math.round(gameState.inequalityLevel) + "%";
+
+    const progress = ((gameState.era - 1) / eras.length) * 100;
+    progressBar.style.width = progress + "%";
+  }
+
+  function loadEra() {
+    if (gameState.era > eras.length) {
+      endGame();
+      return;
+    }
+
+    const current = eras[gameState.era - 1];
+    eraTitle.textContent = current.title;
+    scenarioText.textContent = current.scenario;
+
+    choicesDiv.innerHTML = "";
+    current.choices.forEach((choice) => {
+      const btn = document.createElement("button");
+      btn.className = "btn btn-outline-primary btn-lg m-2";
+      btn.textContent = choice.text;
+      btn.addEventListener("click", () => {
+        // Update meters
+        gameState.economicStability = Math.max(0, Math.min(100, gameState.economicStability + choice.delta.econ));
+        gameState.politicalTrust = Math.max(0, Math.min(100, gameState.politicalTrust + choice.delta.trust));
+        gameState.inequalityLevel = Math.max(0, Math.min(100, gameState.inequalityLevel + choice.delta.ineq));
+        gameState.score += (choice.delta.econ * 0.4 + choice.delta.trust * 0.4 - choice.delta.ineq * 0.2);
+
+        updateMeters();
+
+        // Show feedback in page (no popup)
+        counterOutput.innerHTML = `<strong>Historical Outcome:</strong> ${choice.feedback}`;
+        counterOutput.classList.remove("d-none");
+
+        // Disable all buttons & show next
+        choicesDiv.querySelectorAll("button").forEach(b => b.disabled = true);
+        nextBtn.classList.remove("d-none");
+      });
+      choicesDiv.appendChild(btn);
+    });
+
+    counterOutput.classList.add("d-none");
+    nextBtn.classList.add("d-none");
+    updateMeters();
+  }
+
+  function endGame() {
+    choicesDiv.innerHTML = "";
+    nextBtn.classList.add("d-none");
+    counterOutput.classList.add("d-none");
+
+    let ending = "Game Complete!";
+    if (gameState.economicStability >= 80 && gameState.politicalTrust >= 70) {
+      ending += "<br><strong>Success!</strong> You balanced stability and trust — like the Federal Reserve overcame early tensions.";
+      gameState.score += 30;
+    } else if (gameState.economicStability < 40) {
+      ending += "<br><strong>Economic Disaster!</strong> Repeated instability and panics resulted.";
+    } else if (gameState.politicalTrust < 40) {
+      ending += "<br><strong>Political Collapse!</strong> Backlash destroyed the system.";
+    } else {
+      ending += "<br><strong>Mixed Outcome</strong>: Partial stability, but divisions remained.";
+    }
+
+    gameResult.innerHTML = `
+      <h3 class="text-center mb-4">${ending}</h3>
+      <p class="text-center fs-4 fw-bold">
+        Final Score: ${Math.round(gameState.score)}<br>
+        <small>Stability: ${Math.round(gameState.economicStability)}% | Trust: ${Math.round(gameState.politicalTrust)}% | Inequality: ${Math.round(gameState.inequalityLevel)}%</small>
+      </p>
+      <div class="text-center mt-4">
+        <button class="btn btn-primary btn-lg" onclick="location.reload()">Play Again</button>
+      </div>
+    `;
+  }
+
+  startBtn.addEventListener("click", () => {
+    introSection.classList.add("d-none");
+    gameSection.classList.remove("d-none");
+    loadEra();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    gameState.era++;
+    loadEra();
+  });
+});
+</script>
 
 </body>
 </html>
